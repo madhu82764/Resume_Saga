@@ -43,6 +43,13 @@ your task is to evaluate the resume against the provided job description. give m
 the job description. First the output should come as percentage and then keywords missing and last final thoughts.
 """
 
+
+input_prompt3= """
+Given a resume document, thoroughly analyze all its elements including font styles, font sizes, layout structure, colors, spacing, and template design. Then generate comprehensive LaTeX code that replicates the exact same resume appearance and formatting when compiled in Overleaf. Ensure the LaTeX code includes all necessary packages, custom commands, and formatting details to produce a visually identical resume with precise alignment and styling.
+"""
+input_prompt4 = """
+Identify and correct any errors or bugs present in the LaTeX code used for formatting a professional resume. Ensure that the document layout is visually appealing, with clear sections for personal information, work experience, education, skills, and any additional relevant details. Pay attention to proper formatting, such as font styles, sizes, bullet points, alignment, and overall consistency throughout the resume. Make sure that the final output is polished and ready for submission in a job application or professional setting.
+"""
 # input_prompt="""
 # Hey Act Like a skilled or very experience ATS(Application Tracking System)
 # with a deep understanding of tech field,software engineering,data science ,data analyst
@@ -80,20 +87,39 @@ submit1 = st.button("Tell me about the Resume")
 
 submit2 = st.button("How can I improve my skills")
 
+submit3 = st.button("Show the latex code for the resume")
+
+# submit4 = st.button("Help resolve error in Latex Code")
 
 if submit1:
     if uploaded_file is not None:
         pdf_content = input_pdf_text(uploaded_file)
-        response=get_gemini_response(input_prompt1, pdf_content, jd)
+        response1=get_gemini_response(input_prompt1, pdf_content, jd)
         st.subheader("The Response is")
-        st.write(response)
+        st.write(response1)
     else:
         st.write("Please upload the resume")
 elif submit2:
     if uploaded_file is not None:
         pdf_content = input_pdf_text(uploaded_file)
-        response=get_gemini_response(input_prompt2, pdf_content, jd)
+        response2=get_gemini_response(input_prompt2, pdf_content, jd)
         st.subheader("The Response is")
-        st.write(response)
+        st.write(response2)
     else:
         st.write("Please upload the resume")
+elif submit3:
+    if uploaded_file is not None:
+        pdf_content = input_pdf_text(uploaded_file)
+        response3=get_gemini_response(input_prompt3, pdf_content, jd)
+        st.subheader("The Response is")
+        st.write(response3)
+    else:
+        st.write("Please upload the resume")
+# elif submit4:
+#     if get_gemini_response(input_prompt3, pdf_content, jd) is not None:
+#         response=get_gemini_response(input_prompt4, get_gemini_response(input_prompt3, pdf_content, jd), jd)
+#         st.subheader("The Response is")
+#         st.write(response)
+#     else:
+#         st.write("Please generate the latex code first")
+
